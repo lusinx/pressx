@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-chi/chi"
 	mid "github.com/go-chi/chi/middleware"
+	"github.com/lusinx/pressx/router"
 )
 
 // Rule of thumb: Strict MVC is overrated.
@@ -16,7 +17,7 @@ type Config struct {
 }
 
 func main() {
-	router := chi.NewRouter()
+	r := chi.NewRouter()
 
 	// Set default config
 	config := Config{
@@ -24,12 +25,15 @@ func main() {
 	}
 
 	// Middlewares the default stack shall use
-	router.Use(
+	r.Use(
 		mid.RequestID,
 		mid.RealIP,
 		mid.Logger,
 		mid.Recoverer,
 		mid.Timeout(config.Timeout*time.Second),
 	)
+
+	// Route to views
+	router.Route(r)
 
 }
