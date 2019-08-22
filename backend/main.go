@@ -31,4 +31,5 @@ func main() {
 		mid.Recoverer,
 		mid.Timeout(config.Timeout*time.Second),
 	)
+
 }
