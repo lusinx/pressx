@@ -12,9 +12,3 @@ type Org struct {
 	name  string
 	users []*User
 }
-
-type Setting interface {
-	setting_func()
-}
-
-type Settings = []Setting
