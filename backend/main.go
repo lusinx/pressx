@@ -2,7 +2,7 @@ package main
 
 import (
 	"time"
-
+	"net/http"
 	"github.com/go-chi/chi"
 	mid "github.com/go-chi/chi/middleware"
 	"github.com/lusinx/pressx/router"
@@ -36,4 +36,5 @@ func main() {
 	// Route to views
 	router.Route(r)
 
+	http.ListenAndServe(":8080", r)
 }

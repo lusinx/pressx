@@ -13,9 +13,9 @@ func Route(r *chi.Mux) {
 		sub.Patch("/", views.UpdateUser)
 		sub.Delete("/", views.DeleteUser)
 
-		sub.Route("/settings", func(sub1.Router) {
-			sub1("/", views.GetUserSettings)
-			sub1ch("/", views.PatchUserSettings)
+		sub.Route("/settings", func(sub chi.Router) {
+			sub.Get("/", views.GetUserSettings)
+			sub.Patch("/", views.PatchUserSettings)
 		})
 	})
 
@@ -26,9 +26,9 @@ func Route(r *chi.Mux) {
 		sub.Patch("/", views.UpdateOrg)
 		sub.Delete("/", views.DeleteOrg)
 
-		sub.Route("/settings", func(sub1.Router) {
-			sub1("/", views.GetOrgSettings)
-			sub1ch("/", views.PatchOrgSettings)
+		sub.Route("/settings", func(sub chi.Router) {
+			sub.Get("/", views.GetOrgSettings)
+			sub.Patch("/", views.PatchOrgSettings)
 		})
 	})
 

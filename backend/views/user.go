@@ -1,6 +1,8 @@
 package views
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // These 4 views depend on the session.
 // The user has to be signed in to get proper functionality from these views.
