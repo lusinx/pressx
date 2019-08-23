@@ -1,3 +1,3 @@
 # PRESSX
 
-A fully featured modular commercial CMS.
+### A fully featured modular commercial CMS in development.
