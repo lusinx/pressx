@@ -15,7 +15,14 @@ type Org struct {
 	users []*User
 }
 
-type Page   struct{
+type Page   struct {
 	name    string
 	//content  datatype
+}
+
+type Image struct {
+	external	bool
+	slug		string //where to look for it
+	user		*User
+	cdnPath 	string
 }
