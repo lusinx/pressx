@@ -12,5 +12,18 @@ func Route(r *chi.Mux) {
 		sub.Post("/", views.NewUser)
 		sub.Patch("/", views.UpdateUser)
 		sub.Delete("/", views.DeleteUser)
+
+		sub.Route("/settings", func(routey chi.Router) {
+			routey.Get("/", views.GetUserSettings
+			routey.Patch("/", views.PatchUserSettings)
+		})
+	})
+
+	//Org
+	r.Route("/org", func(sub chi.Router) {
+		sub.Get("/", views.GetOrg)
+		sub.Post("/", views.NewOrg)
+		sub.Patch("/", views.UpdateOrg)
+		sub.Delete("/", views.DeleteOrg)
 	})
 }
