@@ -14,7 +14,7 @@ func Route(r *chi.Mux) {
 		sub.Delete("/", views.DeleteUser)
 
 		sub.Route("/settings", func(routey chi.Router) {
-			routey.Get("/", views.GetUserSettings
+			routey.Get("/", views.GetUserSettings)
 			routey.Patch("/", views.PatchUserSettings)
 		})
 	})
@@ -25,5 +25,11 @@ func Route(r *chi.Mux) {
 		sub.Post("/", views.NewOrg)
 		sub.Patch("/", views.UpdateOrg)
 		sub.Delete("/", views.DeleteOrg)
+
+		sub.Route("/settings", func(routey chi.Router) {
+			routey.Get("/", views.GetOrgSettings)
+			routey.Patch("/", views.PatchOrgSettings)
+		})
 	})
+
 }

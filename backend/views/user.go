@@ -20,3 +20,12 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 }
+
+//Subdirectory /user/settings
+
+func GetUserSettings(w http.ResponseWriter, r *http.Request) {
+
+}
+func PatchUserSettings(w http.ResponseWriter, r *http.Request){
+
+}
