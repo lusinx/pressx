@@ -32,4 +32,12 @@ func Route(r *chi.Mux) {
 		})
 	})
 
+	//Page
+	r.Route("/page", func(sub chi.Router) {
+		sub.Get("/", views.GetPage)
+		sub.Post("/", views.NewPage)
+		sub.Patch("/", views.UpdatePage)
+		sub.Delete("/", views.DeletePage)
+
+})
 }

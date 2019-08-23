@@ -21,6 +21,7 @@ func DeleteOrg(w http.ResponseWriter, r *http.Request) {
 func GetOrgSettings(w http.ResponseWriter, r *http.Request) {
 
 }
+
 func PatchOrgSettings(w http.ResponseWriter, r *http.Request){
 
 }
