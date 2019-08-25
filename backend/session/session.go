@@ -5,10 +5,10 @@ import (
 )
 
 type Session struct {
-	jwt.StandardClaims
 	Username string `json: "username"`
+	jwt.StandardClaims
 }
 
 func CheckStatus() bool {
-
+	return false
 }

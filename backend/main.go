@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-chi/chi"
 	mid "github.com/go-chi/chi/middleware"
+	"github.com/go-chi/jwtauth"
 	"github.com/lusinx/pressx/router"
 )
 
@@ -32,6 +33,7 @@ func main() {
 		mid.Logger,
 		mid.Recoverer,
 		mid.Timeout(config.Timeout*time.Second),
+		jwtauth.Authenticator,
 	)
 	// Route to views
 	router.Route(r)
