@@ -7,7 +7,6 @@ import (
 	"github.com/go-chi/chi"
 	mid "github.com/go-chi/chi/middleware"
 	"github.com/lusinx/pressx/router"
-	"github.com/lusinx/pressx/sessions"
 )
 
 // Rule of thumb: Strict MVC is overrated.
@@ -34,8 +33,6 @@ func main() {
 		mid.Recoverer,
 		mid.Timeout(config.Timeout*time.Second),
 	)
-	// Check session
-	sessions.CheckStatus()
 	// Route to views
 	router.Route(r)
 

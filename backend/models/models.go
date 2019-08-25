@@ -1,11 +1,12 @@
 package models
 
 type User struct {
-	id          string
-	username    string
-	img 		string
-	permissions int8
-	orgs        []*Org
+	id              string
+	username        string
+	img             string
+	permissions     uint8
+	viewPermissions uint8
+	orgs            []*Org
 }
 
 type Org struct {
@@ -15,14 +16,14 @@ type Org struct {
 	users []*User
 }
 
-type Page   struct {
-	name    string
+type Page struct {
+	name string
 	//content  datatype
 }
 
 type Image struct {
-	external	bool
-	slug		string //where to look for it
-	user		*User
-	cdnPath 	string
+	external bool
+	slug     string //where to look for it
+	user     *User
+	cdnPath  string
 }
