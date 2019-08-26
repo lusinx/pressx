@@ -3,7 +3,9 @@ package session
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
+	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/lusinx/pressx/database"
 )
 
@@ -24,5 +26,16 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	if !database.QueryAuth(cred.Username, cred.Password) {
 		w.WriteHeader(http.StatusUnauthorized)
 	}
+
+	expirationTime := time.Now().Add(5 * time.Minute)
+
+	claims := &Claims{
+		Username: cred.Username,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 }

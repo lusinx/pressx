@@ -8,13 +8,12 @@ import (
 	mid "github.com/go-chi/chi/middleware"
 	"github.com/go-chi/jwtauth"
 	"github.com/lusinx/pressx/router"
+	"github.com/lusinx/pressx/session"
 )
 
 // Rule of thumb: Strict MVC is overrated.
 // Make a fucntional router, then add functionality to slug patterns.
 // Benefits: Less convoluted and easier to maintain.
-
-var tokenAuth *jwtauth.JWTAuth
 
 type Config struct {
 	Timeout time.Duration // In seconds
@@ -36,7 +35,7 @@ func main() {
 		mid.Recoverer,
 		mid.Timeout(config.Timeout*time.Second),
 		jwtauth.Authenticator,
-		jwtauth.Verifier(tokenAuth)
+		jwtauth.Verifier(session.TokenAuth),
 	)
 	// Route to views
 	router.Route(r)
