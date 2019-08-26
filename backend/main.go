@@ -14,6 +14,8 @@ import (
 // Make a fucntional router, then add functionality to slug patterns.
 // Benefits: Less convoluted and easier to maintain.
 
+var tokenAuth *jwtauth.JWTAuth
+
 type Config struct {
 	Timeout time.Duration // In seconds
 }
@@ -34,6 +36,7 @@ func main() {
 		mid.Recoverer,
 		mid.Timeout(config.Timeout*time.Second),
 		jwtauth.Authenticator,
+		jwtauth.Verifier(tokenAuth)
 	)
 	// Route to views
 	router.Route(r)

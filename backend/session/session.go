@@ -4,8 +4,8 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
-type Session struct {
-	Username string `json: "username"`
+type Claims struct {
+	Username string `json:"username"`
 	jwt.StandardClaims
 }
 
