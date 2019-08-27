@@ -6,9 +6,7 @@ import (
 
 	"github.com/go-chi/chi"
 	mid "github.com/go-chi/chi/middleware"
-	"github.com/go-chi/jwtauth"
 	"github.com/lusinx/pressx/router"
-	"github.com/lusinx/pressx/session"
 )
 
 // Rule of thumb: Strict MVC is overrated.
@@ -34,8 +32,6 @@ func main() {
 		mid.Logger,
 		mid.Recoverer,
 		mid.Timeout(config.Timeout*time.Second),
-		jwtauth.Authenticator,
-		jwtauth.Verifier(session.TokenAuth),
 	)
 	// Route to views
 	router.Route(r)

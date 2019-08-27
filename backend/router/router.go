@@ -2,12 +2,18 @@ package router
 
 import (
 	"github.com/go-chi/chi"
+	"github.com/go-chi/jwtauth"
+	"github.com/lusinx/pressx/session"
 	"github.com/lusinx/pressx/views"
 )
 
 func Route(r *chi.Mux) {
-	// Public routes
+	// Private routes
 	r.Group(func(r chi.Router) {
+		r.Use(
+			session.Authenticator,
+			jwtauth.Verifier(session.TokenAuth),
+		)
 		// User
 		r.Route("/user", func(sub chi.Router) {
 			sub.Get("/", views.GetUser)
@@ -21,9 +27,7 @@ func Route(r *chi.Mux) {
 			})
 		})
 
-		//Org
 		r.Route("/org", func(sub chi.Router) {
-			sub.Get("/", views.GetOrg)
 			sub.Post("/", views.NewOrg)
 			sub.Patch("/", views.UpdateOrg)
 			sub.Delete("/", views.DeleteOrg)
@@ -36,11 +40,27 @@ func Route(r *chi.Mux) {
 
 		//Page
 		r.Route("/page", func(sub chi.Router) {
-			sub.Get("/", views.GetPage)
 			sub.Post("/", views.NewPage)
 			sub.Patch("/", views.UpdatePage)
 			sub.Delete("/", views.DeletePage)
+		})
+	})
 
+	// Public routes
+	r.Group(func(r chi.Router) {
+		// User
+		r.Route("/user/{user}", func(sub chi.Router) {
+			sub.Get("/", views.GetUser)
+		})
+
+		// Org
+		r.Route("/org", func(sub chi.Router) {
+			sub.Get("/", views.GetOrg)
+		})
+
+		// Page
+		r.Route("/page", func(sub chi.Router) {
+			sub.Get("/", views.GetPage)
 		})
 	})
 
