@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -17,6 +18,8 @@ import (
 type Config struct {
 	Timeout time.Duration // In seconds
 }
+
+const port = 8080
 
 func main() {
 	r := chi.NewRouter()
@@ -37,7 +40,10 @@ func main() {
 	// Route to views
 	router.Route(r)
 
-	if http.ListenAndServe(":8080", r) != nil {
+	fmt.Printf("Running server on port %d", port)
+
+	if http.ListenAndServe(fmt.Sprintf(":%d", port), r) != nil {
 		os.Exit(1)
 	}
+
 }

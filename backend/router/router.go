@@ -54,12 +54,12 @@ func Route(r *chi.Mux) {
 		})
 
 		// Org
-		r.Route("/org", func(sub chi.Router) {
+		r.Route("/org/{org}", func(sub chi.Router) {
 			sub.Get("/", views.GetOrg)
 		})
 
 		// Page
-		r.Route("/page", func(sub chi.Router) {
+		r.Route("/page/{page}", func(sub chi.Router) {
 			sub.Get("/", views.GetPage)
 		})
 	})
