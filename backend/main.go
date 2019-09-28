@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/go-chi/chi"
@@ -10,7 +11,7 @@ import (
 )
 
 // Rule of thumb: Strict MVC is overrated.
-// Make a fucntional router, then add functionality to slug patterns.
+// Make a functional router, then add functionality to slug patterns.
 // Benefits: Less convoluted and easier to maintain.
 
 type Config struct {
@@ -36,5 +37,7 @@ func main() {
 	// Route to views
 	router.Route(r)
 
-	http.ListenAndServe(":8080", r)
+	if http.ListenAndServe(":8080", r) != nil {
+		os.Exit(1)
+	}
 }
