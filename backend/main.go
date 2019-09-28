@@ -40,7 +40,7 @@ func main() {
 	// Route to views
 	router.Route(r)
 
-	fmt.Printf("Running server on port %d", port)
+	fmt.Printf("\033[1mRunning server on port %d\033[0m \n", port)
 
 	if http.ListenAndServe(fmt.Sprintf(":%d", port), r) != nil {
 		os.Exit(1)
