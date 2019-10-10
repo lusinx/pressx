@@ -1,0 +1,66 @@
+body {
+    background-color: #825E58;
+}
+p {
+    position: absolute;
+    top: 500%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    color: #AE8F4F;
+    animation: appear ease forwards 1s;
+}
+#logo {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #AE8F4F;
+    animation: fill 1s ease forwards 0.6s;
+}
+
+#logo path:nth-child(1) {
+    stroke-dasharray: 458px;
+    stroke-dashoffset: 458px;
+    animation: line-anim .4s ease forwards 0.1s;
+}
+#logo path:nth-child(2) {
+    stroke-dasharray: 264px;
+    stroke-dashoffset: 264px;
+    animation: line-anim .4s ease forwards 0.2s;
+}
+#logo path:nth-child(3) {
+    stroke-dasharray: 458px;
+    stroke-dashoffset: 458px;
+    animation: line-anim .4s ease forwards 0.3s;
+}
+#logo path:nth-child(4) {
+    stroke-dasharray: 425px;
+    stroke-dashoffset: 425px;
+    animation: line-anim .4s ease forwards 0.4s;
+}
+#logo path:nth-child(5) {
+    stroke-dasharray: 425px;
+    stroke-dashoffset: 425px;
+    animation: line-anim .4s ease forwards 0.5s;
+}
+#logo path:nth-child(6) {
+    stroke-dasharray: 393px;
+    stroke-dashoffset: 393px;
+    animation: line-anim .4s ease forwards 0.6s;
+}
+
+@keyframes line-anim {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes fill {
+    from {
+        fill: transparent;
+    }
+    to {
+        fill: #AE8F4F;
+    }
+}
