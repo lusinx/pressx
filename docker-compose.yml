@@ -1,6 +1,13 @@
-version: '3'
+version: "3"
 services:
-  backend:
+  backend-dev:
     ports:
       - "8080:8080"
-    image: "pressx-backend"
+    image: "pressx-dev-backend"
+    build:
+      context: "backend"
+      dockerfile: "development.Dockerfile"
+    working_dir: "/backend"
+    command: sh -c "go get -v && go get github.com/cortesi/modd/cmd/modd && modd"
+    volumes:
+      - ./backend:/backend
