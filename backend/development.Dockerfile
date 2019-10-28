@@ -5,7 +5,7 @@ WORKDIR /backend
 
 COPY . .
 
-RUN go get -v
+RUN go get -v; go get github.com/cortesi/modd/cmd/modd
 RUN go build
 
-CMD["./pressx"]
+CMD ["./pressx"]
