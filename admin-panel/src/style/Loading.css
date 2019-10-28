@@ -2,9 +2,34 @@ svg {
     animation: fill 2s;
 }
 
-path {
-    stroke-dasharray: 100em;
-    stroke-dashoffset: 100em;
+path:nth-child(1){
+    stroke-dasharray: 550px;
+    stroke-dashoffset: 550px;
+    animation: lineanim 1s ease forwards;
+}
+path:nth-child(2){
+    stroke-dasharray: 654px;
+    stroke-dashoffset: 654px;
+    animation: lineanim 1s ease forwards;
+}
+path:nth-child(3){
+    stroke-dasharray: 619px;
+    stroke-dashoffset: 619px;
+    animation: lineanim 1s ease forwards;
+}
+path:nth-child(4){
+    stroke-dasharray: 616px;
+    stroke-dashoffset: 616px;
+    animation: lineanim 1s ease forwards;
+}
+path:nth-child(5){
+    stroke-dasharray: 616px;
+    stroke-dashoffset: 616px;
+    animation: lineanim 1s ease forwards;
+}
+path:nth-child(6){
+    stroke-dasharray: 582px;
+    stroke-dashoffset: 582px;
     animation: lineanim 1s ease forwards;
 }
 
