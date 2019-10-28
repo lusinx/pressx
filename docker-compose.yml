@@ -4,5 +4,10 @@ services:
     ports:
       - "8080:8080"
     image: "pressx-dev-backend"
-    build: "backend"
-    dockerfile: "development.Dockerfile"
+    build:
+      context: "backend"
+      dockerfile: "development.Dockerfile"
+    working_dir: "/backend"
+    command: sh -c "go get -v && go get github.com/cortesi/modd/cmd/modd && modd"
+    volumes:
+      - ./backend:/backend
