@@ -11,8 +11,8 @@ func Route(r *chi.Mux) {
 	// Private routes
 	r.Group(func(r chi.Router) {
 		r.Use(
-			session.Authenticator,
 			jwtauth.Verifier(session.TokenAuth),
+			session.Authenticator,
 		)
 		// User
 		r.Route("/user", func(sub chi.Router) {
