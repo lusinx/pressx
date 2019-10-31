@@ -10,12 +10,14 @@ import (
 func Route(r *chi.Mux) {
 	// Private routes
 	r.Group(func(r chi.Router) {
+		route := ""
 		r.Use(
-			session.Authenticator,
 			jwtauth.Verifier(session.TokenAuth),
+			session.ModAuthenticator(route),
 		)
 		// User
 		r.Route("/user", func(sub chi.Router) {
+			route = "/user"
 			sub.Get("/", views.GetUser)
 			sub.Post("/", views.NewUser)
 			sub.Patch("/", views.UpdateUser)
@@ -28,6 +30,7 @@ func Route(r *chi.Mux) {
 		})
 
 		r.Route("/org", func(sub chi.Router) {
+			route = "/org"
 			sub.Post("/", views.NewOrg)
 			sub.Patch("/", views.UpdateOrg)
 			sub.Delete("/", views.DeleteOrg)
@@ -40,10 +43,12 @@ func Route(r *chi.Mux) {
 
 		//Page
 		r.Route("/page", func(sub chi.Router) {
+			route = "/page"
 			sub.Post("/", views.NewPage)
 			sub.Patch("/", views.UpdatePage)
 			sub.Delete("/", views.DeletePage)
 		})
+
 	})
 
 	// Public routes

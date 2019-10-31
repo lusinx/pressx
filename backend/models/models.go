@@ -4,9 +4,10 @@ type User struct {
 	id              string
 	username        string
 	img             string
-	permissions     uint8
+	permissions     uint8 // For frontend auth
 	viewPermissions uint8
 	orgs            []*Org
+	authGroup       int // Admin panel auth
 }
 
 type Org struct {
