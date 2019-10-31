@@ -15,11 +15,13 @@ func ModAuthenticator(route string) func(http.Handler) http.Handler {
 			token, claims, err := jwtauth.FromContext(r.Context())
 
 			if err != nil {
+				fmt.Println("Invalid header")
 				http.Error(w, http.StatusText(401), 401)
 				return
 			}
 
 			if token == nil || !token.Valid {
+				fmt.Println("Invalid token")
 				http.Error(w, http.StatusText(401), 401)
 				return
 			}
@@ -28,8 +30,9 @@ func ModAuthenticator(route string) func(http.Handler) http.Handler {
 			if code, ok := claims["auth_group"].(int); ok && database.VerifyAuth(code, route) {
 				// Private route
 				// Token is authenticated, pass it through
-				fmt.Printf("Route authenticated [%s] with auth_group [%d]", route, code)
+				fmt.Printf("Route authenticated [%s] with auth_group [%d]\n", route, code)
 				next.ServeHTTP(w, r)
+				return
 			}
 
 			http.Error(w, http.StatusText(401), 401)
