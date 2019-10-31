@@ -6,5 +6,8 @@ func QueryAuth(username, password string) bool {
 
 // This will query the User DB if a route (or all routes) is accessible
 func VerifyAuth(code int, route string) bool {
+	if code == 1 {
+		return true
+	}
 	return false
 }

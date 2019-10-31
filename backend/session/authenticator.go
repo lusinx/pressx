@@ -1,6 +1,7 @@
 package session
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/jwtauth"
@@ -27,6 +28,7 @@ func ModAuthenticator(route string) func(http.Handler) http.Handler {
 			if code, ok := claims["auth_group"].(int); ok && database.VerifyAuth(code, route) {
 				// Private route
 				// Token is authenticated, pass it through
+				fmt.Printf("Route authenticated [%s] with auth_group [%d]", route, code)
 				next.ServeHTTP(w, r)
 			}
 
