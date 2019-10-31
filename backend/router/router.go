@@ -12,7 +12,7 @@ func Route(r *chi.Mux) {
 	r.Group(func(r chi.Router) {
 		r.Use(
 			jwtauth.Verifier(session.TokenAuth),
-			session.Authenticator,
+			session.ModAuthenticator,
 		)
 		// User
 		r.Route("/user", func(sub chi.Router) {

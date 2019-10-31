@@ -16,7 +16,8 @@ type Claims struct {
 
 func init() {
 	TokenAuth = jwtauth.New("HS256", "secret_placeholder", nil)
-	_, str, _ := TokenAuth.Encode(jwtauth.Claims{"admin": true})
+	// auth_group will be mapped to a table of permissions
+	_, str, _ := TokenAuth.Encode(jwtauth.Claims{"auth_group": 0})
 	fmt.Printf("JWT generated: %s", str)
 }
 func CheckStatus() bool {
