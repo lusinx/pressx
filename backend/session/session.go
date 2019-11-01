@@ -19,7 +19,7 @@ func init() {
 	TokenAuth = jwtauth.New("HS256", []byte("jrhTo4yE5lELmaVpYsq05Jcy2C264M7e"), nil)
 	// auth_group will be mapped to a table of permissions
 	_, str, _ := TokenAuth.Encode(jwtauth.Claims{"auth_group": 0})
-	fmt.Printf("JWT generated: %s", str)
+	fmt.Printf("JWT generated: %s\n", str)
 }
 func CheckStatus() bool {
 	return false

@@ -9,7 +9,7 @@ import (
 )
 
 // Used to Authenticate Moderators with a moderation code
-func ModAuthenticator(route string) func(http.Handler) http.Handler {
+func ModAuthenticator(route *string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			token, claims, err := jwtauth.FromContext(r.Context())
@@ -27,10 +27,10 @@ func ModAuthenticator(route string) func(http.Handler) http.Handler {
 			}
 
 			// Get auth group code, check if valid, then verify
-			if code, ok := claims["auth_group"].(int); ok && database.VerifyAuth(code, route) {
+			if code, ok := claims["auth_group"].(float64); ok && database.VerifyAuth(int(code), *route) {
 				// Private route
 				// Token is authenticated, pass it through
-				fmt.Printf("Route authenticated [%s] with auth_group [%d]\n", route, code)
+				fmt.Printf("Route authenticated [%s] with auth_group [%d]\n", *route, int(code))
 				next.ServeHTTP(w, r)
 				return
 			}

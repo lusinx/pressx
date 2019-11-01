@@ -13,7 +13,7 @@ func Route(r *chi.Mux) {
 		route := ""
 		r.Use(
 			jwtauth.Verifier(session.TokenAuth),
-			session.ModAuthenticator(route),
+			session.ModAuthenticator(&route),
 		)
 		// User
 		r.Route("/user", func(sub chi.Router) {
