@@ -1,6 +1,7 @@
 package models
 
 type User struct {
+	// data about a user
 	id              string
 	username        string
 	img             string
@@ -11,6 +12,7 @@ type User struct {
 }
 
 type Org struct {
+	// data relating to an organisation
 	id    string
 	name  string
 	img   string
@@ -18,13 +20,23 @@ type Org struct {
 }
 
 type Page struct {
-	name string
-	//content  datatype
+	// data contained in a page
+	name    string
+	content *Content
 }
 
 type Image struct {
+	// data contained within an image type
 	external bool
 	slug     string //where to look for it
 	user     *User
 	cdnPath  string
+}
+
+type Content struct {
+	//  data contained within content
+	format int
+	body   string
+	user   *User
+	id     string
 }
