@@ -2,32 +2,46 @@ package views
 
 import (
 	"net/http"
+	"github.com/jinzhu/gorm"
+	"github.com/lusinx/pressx/models"
 )
 
 // These 4 views depend on the session.
 // The user has to be signed in to get proper functionality from these views.
 
-func GetUser(w http.ResponseWriter, r *http.Request) {
+func GetUser(db *gorm.DB) {
+
+	db.Find(models.User{})
 
 }
 
-func NewUser(w http.ResponseWriter, r *http.Request) {
+func NewUser(data models.User, db *gorm.DB) {
+
+	db.Save(data)
 
 }
 
-func UpdateUser(w http.ResponseWriter, r *http.Request) {
+func UpdateUser(data models.User, db *gorm.DB) {
+
+	db.Model(data).Updates(models.User{})
 
 }
 
-func DeleteUser(w http.ResponseWriter, r *http.Request) {
+func DeleteUser(id string, db *gorm.DB) {
+
+	db.Where("id = %s", id).Delete(models.User{})
 
 }
 
 //Subdirectory /user/settings
 
-func GetUserSettings(w http.ResponseWriter, r *http.Request) {
+// func GetUserSetting(id string, db *gorm.DB) {
 
-}
-func PatchUserSettings(w http.ResponseWriter, r *http.Request){
+// 	// db.Where("id = %s", id).Find(models.Settings{})
 
-}
+// }
+// func PatchUserSettings(data models.Settings, db *gorm.DB){
+
+
+	
+// }
