@@ -1,9 +1,12 @@
 package views
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 func GetOrg(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Fprint(w, "GET request to Org")
 }
 func NewOrg(w http.ResponseWriter, r *http.Request) {
 
@@ -22,6 +25,6 @@ func GetOrgSettings(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func PatchOrgSettings(w http.ResponseWriter, r *http.Request){
+func UpdateOrgSettings(w http.ResponseWriter, r *http.Request) {
 
 }

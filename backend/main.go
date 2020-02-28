@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-chi/chi"
 	mid "github.com/go-chi/chi/middleware"
+	"github.com/gorilla/mux"
 	"github.com/lusinx/pressx/router"
 )
 
@@ -15,6 +15,7 @@ import (
 // Make a functional router, then add functionality to slug patterns.
 // Benefits: Less convoluted and easier to maintain.
 
+// Config for Chi Middlewares
 type Config struct {
 	Timeout time.Duration // In seconds
 }
@@ -22,7 +23,7 @@ type Config struct {
 const port = 8080
 
 func main() {
-	r := chi.NewRouter()
+	r := mux.NewRouter()
 
 	// Set default config
 	config := Config{
