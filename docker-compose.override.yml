@@ -4,6 +4,7 @@ services:
     ports:
       - "8080:8080"
     image: "pressx-dev-backend"
+    name: "pressx-dev-backend"
     build:
       context: "backend"
       dockerfile: "development.Dockerfile"
@@ -14,8 +15,9 @@ services:
   admin:
     ports:
       - "1234:1234"
-      - "46341:46341"
+      - "8000:8000"
     image: "pressx-dev-admin"
+    name: "pressx-dev-admin"
     build:
       context: "admin"
       dockerfile: "development.Dockerfile"
