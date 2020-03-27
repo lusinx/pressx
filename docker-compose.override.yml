@@ -14,8 +14,8 @@ services:
       - ./backend:/backend
   admin:
     ports:
-      - "1234:1234"
       - "8000:8000"
+      - "8888:8888"
     image: "pressx-dev-admin"
     container_name: "pressx-dev-admin"
     build:
