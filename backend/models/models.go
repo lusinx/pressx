@@ -15,6 +15,7 @@ type User struct {
 }
 
 type Org struct {
+	// data relating to an organisation
 	gorm.Model
 	ID    string	`gorm:"unique" gorm:"primary_key"`
 	Name  string
@@ -23,15 +24,25 @@ type Org struct {
 }
 
 type Page struct {
+	// data contained within a page
 	Name string
 	//content  datatype
 }
 
 type Image struct {
+	// data contained within an image
 	External bool
 	Slug     string		`gorm:"unique" gorm:"primary_key"`//where to look for it
 	User     *User
 	CdnPath  string
+}
+
+type Content struct {
+	//  data contained within content
+	format int
+	body   string
+	user   *User
+	id     string
 }
 
 
