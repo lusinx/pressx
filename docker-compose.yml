@@ -11,15 +11,15 @@ services:
     command: sh -c "go get -v && go get github.com/cortesi/modd/cmd/modd && modd"
     volumes:
       - ./backend:/backend
-  admin-panel-dev:
+  admin-dev:
     ports:
       - "1234:1234"
       - "46341:46341"
-    image: "pressx-dev-admin-panel"
+    image: "pressx-dev-admin"
     build:
-      context: "admin-panel"
+      context: "admin"
       dockerfile: "development.Dockerfile"
     working_dir: "/admin"
     command: sh -c "npm i && npm start"
     volumes:
-      - ./admin-panel:/admin
+      - ./admin:/admin
