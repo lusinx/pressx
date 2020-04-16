@@ -18,8 +18,8 @@ jobs:
       with:
         name: lusinx/pressx/backend
         username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.TOKEN}}
+        password: ${{ secrets.TOKEN }}
         workdir: backend
         registry: docker.pkg.github.com
-        tags: "dev-env, $(date +%s)"
+        tags: "dev-env, ${{ github.sha }}"
         buildargs: --target dev
