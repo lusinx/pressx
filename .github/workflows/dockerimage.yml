@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: echo "$TOKEN" | docker login docker.pkg.github.com -u ericm --password-stdin && docker build backend --tag docker.pkg.github.com/lusinx/pressx/backend:dev-env && docker push docker.pkg.github.com/lusinx/pressx/backend:dev-env 
+      run: docker login docker.pkg.github.com -u ericm -p $TOKEN && docker build backend --tag docker.pkg.github.com/lusinx/pressx/backend:dev-env && docker push docker.pkg.github.com/lusinx/pressx/backend:dev-env 
