@@ -20,7 +20,7 @@ type Config struct {
 	Timeout time.Duration // In seconds
 }
 
-const port = 8080
+const port = 80
 
 func main() {
 	r := mux.NewRouter()

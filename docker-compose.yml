@@ -3,11 +3,8 @@ services:
   backend:
     ports:
       - "8080:80"
-    image: "pressx-backend"
+    image: "docker.pkg.github.com/lusinx/pressx/backend:dev-env"
     container_name: "backend"
-    build:
-      context: "backend"
-      target: dev
     command: modd
     volumes:
       - ./backend:/pressx
