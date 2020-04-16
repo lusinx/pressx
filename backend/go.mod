@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/go-chi/chi v4.0.3+incompatible
+	github.com/go-chi/jwtauth v4.0.4+incompatible
 	github.com/gorilla/mux v1.7.4
 	github.com/jinzhu/gorm v1.9.12
 	github.com/spf13/viper v1.6.3

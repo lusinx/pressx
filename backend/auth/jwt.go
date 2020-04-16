@@ -5,6 +5,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-chi/jwtauth"
+	"github.com/lusinx/pressx/models"
 	"github.com/spf13/viper"
 )
 
@@ -18,9 +19,7 @@ func UserSession(instance *jwtauth.JWTAuth, user *models.UserAuth) (*jwt.Token, 
 	if token, str, err := instance.Encode(jwt.MapClaims{"user_id": user.ID, "perms": user.Perms}); err != nil {
 		return nil, err
 	} else {
-		if config.Dev {
-			fmt.Printf("Gen JWT for user %d::\n%s\n", user.ID, str)
-		}
+		fmt.Printf("Gen JWT for user %d::\n%s\n", user.ID, str)
 		return token, nil
 	}
 }

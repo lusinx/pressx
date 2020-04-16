@@ -8,4 +8,5 @@ type UserAuth struct {
 	Username string
 	Password string
 	Salt     string
+	Perms    uint8
 }
