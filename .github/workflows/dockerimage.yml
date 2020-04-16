@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: lusinx/pressx/backend
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.TOKEN }}
+        workdir: backend
+        registry: docker.pkg.github.com
+        tags: "dev-env, ${{ github.sha }}"
+        buildargs: --target dev
