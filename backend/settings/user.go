@@ -1,11 +1,12 @@
 package settings
 
-// User settings
+// SettingName no
 type SettingName struct {
 	baseSetting
 	state *string
 }
 
-func (set *SettingName) Change(new_state string) {
-	*set.state = new_state
+// Change it
+func (set *SettingName) Change(newState string) {
+	*set.state = newState
 }
