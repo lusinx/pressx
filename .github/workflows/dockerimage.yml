@@ -21,5 +21,5 @@ jobs:
         password: ${{ secrets.TOKEN}}
         workdir: backend
         registry: docker.pkg.github.com
-        tags: dev-env
+        tags: "dev-env, $(date +%s)"
         buildargs: --target dev
