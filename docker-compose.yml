@@ -12,9 +12,9 @@ services:
       - JWT_TOKEN
       - POSTGRES_HOST=172.16.238.13
       - POSTGRES_PORT=5432
-      - POSTGRES_USERNAME
+      - POSTGRES_USER
       - POSTGRES_PASSWORD
-      - POSTGRES_DATABASE
+      - POSTGRES_DATABASE=${POSTGRES_USER}
     networks:
       backend:
         ipv4_address: 172.16.238.10
