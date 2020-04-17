@@ -1,5 +1,6 @@
 package models
 
+// Image structure
 type Image struct {
 	// data contained within an image
 	External bool

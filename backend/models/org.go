@@ -1,5 +1,6 @@
 package models
 
+// Org structure
 type Org struct {
 	// data relating to an organisation
 	ID    string `gorm:"unique" gorm:"primary_key"`

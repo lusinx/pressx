@@ -2,7 +2,7 @@ package models
 
 import "github.com/jinzhu/gorm"
 
-// UserAuth struct to store items necessary for login
+// UserAuth structure
 type UserAuth struct {
 	gorm.Model
 	Username string
