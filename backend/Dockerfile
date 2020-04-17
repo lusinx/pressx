@@ -1,7 +1,5 @@
 FROM golang:1.13-alpine AS dev
 
-VOLUME [ "/pressx" ]
-
 RUN apk add --no-cache git
 
 RUN env GO111MODULE=on go get -v github.com/cortesi/modd/cmd/modd
