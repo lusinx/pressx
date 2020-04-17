@@ -55,6 +55,9 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Generate the user
+	// salt := auth.GenerateSalt()
+	// password = auth.HashPassword(password, salt)
+	// user := models.UserAuth{}
 }
 
 // UpdateUser PUT Request
