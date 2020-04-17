@@ -1,9 +1,11 @@
-package models
+import (
+	"fmt"
 
-import "fmt"
-
+	"github.com/jinzhu/gorm"
+)
 // Page structure
 type Page struct {
+	gorm.Model
 	// data contained within a page
 	Name string
 	//content  datatype

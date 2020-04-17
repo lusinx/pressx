@@ -1,9 +1,14 @@
 package models
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/jinzhu/gorm"
+)
 
 // Content structure
 type Content struct {
+	gorm.Model
 	//  data contained within content
 	format int
 	body   string

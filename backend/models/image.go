@@ -1,9 +1,11 @@
-package models
+import (
+	"fmt"
 
-import "fmt"
-
+	"github.com/jinzhu/gorm"
+)
 // Image structure
 type Image struct {
+	gorm.Model
 	// data contained within an image
 	External bool
 	Slug     string `gorm:"unique" gorm:"primary_key"` //where to look for it
