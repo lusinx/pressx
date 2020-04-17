@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/spf13/viper"
@@ -11,4 +12,15 @@ func Init() {
 	RegisterDefaults()
 	viper.EnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()
+	viper.Set(
+		"postgres.config",
+		fmt.Sprintf(
+			"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+			viper.GetString("postgres.host"),
+			viper.GetInt("postgres.port"),
+			viper.GetString("postgres.username"),
+			viper.GetString("postgres.password"),
+			viper.GetString("postgres.database"),
+		),
+	)
 }
