@@ -1,12 +1,12 @@
 package settings
 
-// SettingName no
+// SettingName structure
 type SettingName struct {
 	baseSetting
 	state *string
 }
 
-// Change it
+// Change methods
 func (set *SettingName) Change(newState string) {
 	*set.state = newState
 }

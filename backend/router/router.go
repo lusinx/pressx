@@ -15,6 +15,7 @@ func Route(r *mux.Router) {
 
 	// User routes
 	r.HandleFunc("/user/{user}", views.GetUser).Methods("GET") // Public
+<<<<<<< HEAD
 	authed.HandleFunc("/user", views.NewUser).Methods("POST")
 	authed.HandleFunc("/user", views.UpdateUser).Methods("PATCH")
 	authed.HandleFunc("/user", views.DeleteUser).Methods("DELETE")
@@ -38,6 +39,31 @@ func Route(r *mux.Router) {
 	authed.HandleFunc("/page", views.NewPage).Methods("POST")
 	authed.HandleFunc("/page/{page}", views.UpdatePage).Methods("POST")
 	authed.HandleFunc("/page/{page}", views.DeletePage).Methods("POST")
+=======
+	r.HandleFunc("/user", views.NewUser).Methods("POST")
+	r.HandleFunc("/user", views.UpdateUser).Methods("PUT")
+	r.HandleFunc("/user", views.DeleteUser).Methods("DELETE")
+
+	// user settings routes
+	r.HandleFunc("/user/settings", views.GetUserSettings).Methods("GET")
+	r.HandleFunc("/user/settings", views.UpdateUserSettings).Methods("PUT")
+
+	// Org routes
+	r.HandleFunc("/org/{org}", views.GetOrg).Methods("GET") // Public
+	r.HandleFunc("/org", views.NewOrg).Methods("GET")
+	r.HandleFunc("/org", views.UpdateOrg).Methods("PUT")
+	r.HandleFunc("/user", views.DeleteOrg).Methods("GET")
+
+	// org settings routes
+	r.HandleFunc("/org/settings", views.GetOrgSettings).Methods("GET")
+	r.HandleFunc("/org/settings", views.UpdateOrgSettings).Methods("PUT")
+
+	// Post routes
+	r.HandleFunc("/page/{page}", views.GetPage).Methods("GET") // Public
+	r.HandleFunc("/page", views.NewPage).Methods("POST")
+	r.HandleFunc("/page/{page}", views.UpdatePage).Methods("PUT")
+	r.HandleFunc("/page/{page}", views.DeletePage).Methods("POST")
+>>>>>>> 160392fcfad38e1c8553933dd506e07188256c63
 }
 
 // r.Group(func(r chi.Router) {
