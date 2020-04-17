@@ -8,6 +8,36 @@ services:
     command: modd
     volumes:
       - ./backend:/pressx
+    environment:
+      - JWT_TOKEN
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_USERNAME
+      - POSTGRES_PASSWORD
+      - POSTGRES_DATABASE
+    networks:
+      backend:
+        ipv4_address: 172.16.238.10
+
+  postgres:
+    image: "postgres:12-alpine"
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+    networks:
+      backend:
+        ipv4_address: 172.16.238.13
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      backend:
+        ipv4_address: 172.16.238.12
+    ports:
+      - 9999:8080
+
   admin:
     ports:
       - "8000:8000"
@@ -21,3 +51,11 @@ services:
     command: sh -c "npm i && npm start"
     volumes:
       - ./admin:/admin
+
+networks:
+  # Backend bridged network
+  backend:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.238.0/24"
