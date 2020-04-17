@@ -2,37 +2,42 @@ package router
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/lusinx/pressx/middleware"
 	"github.com/lusinx/pressx/views"
 )
 
 // Route Main Router
 func Route(r *mux.Router) {
+	// Level 255 - Pleb number
+	// authed are routes that require base authentication
+	authed := r.NewRoute().Subrouter()
+	authed.Use(middleware.AuthUser(255))
+
 	// User routes
-
 	r.HandleFunc("/user/{user}", views.GetUser).Methods("GET") // Public
-	r.HandleFunc("/user", views.NewUser).Methods("POST")
-	r.HandleFunc("/user", views.UpdateUser).Methods("PATCH")
-	r.HandleFunc("/user", views.DeleteUser).Methods("DELETE")
+	authed.HandleFunc("/user", views.NewUser).Methods("POST")
+	authed.HandleFunc("/user", views.UpdateUser).Methods("PATCH")
+	authed.HandleFunc("/user", views.DeleteUser).Methods("DELETE")
 
-	// user settings routes
-	r.HandleFunc("/user/settings", views.GetUserSettings).Methods("GET")
-	r.HandleFunc("/user/settings", views.UpdateUserSettings).Methods("PATCH")
+	// User settings routes
+	authed.HandleFunc("/user/settings", views.GetUserSettings).Methods("GET")
+	authed.HandleFunc("/user/settings", views.UpdateUserSettings).Methods("PATCH")
 
 	// Org routes
 	r.HandleFunc("/org/{org}", views.GetOrg).Methods("GET") // Public
-	r.HandleFunc("/org", views.NewOrg).Methods("GET")
-	r.HandleFunc("/org", views.UpdateOrg).Methods("GET")
-	r.HandleFunc("/user", views.DeleteOrg).Methods("GET")
+	authed.HandleFunc("/org", views.NewOrg).Methods("GET")
+	authed.HandleFunc("/org", views.UpdateOrg).Methods("GET")
+	authed.HandleFunc("/user", views.DeleteOrg).Methods("GET")
 
 	// org settings routes
-	r.HandleFunc("/org/settings", views.GetOrgSettings).Methods("GET")
-	r.HandleFunc("/org/settings", views.UpdateOrgSettings).Methods("GET")
+	authed.HandleFunc("/org/settings", views.GetOrgSettings).Methods("GET")
+	authed.HandleFunc("/org/settings", views.UpdateOrgSettings).Methods("GET")
 
 	// Post routes
 	r.HandleFunc("/page/{page}", views.GetPage).Methods("GET") // Public
-	r.HandleFunc("/page", views.NewPage).Methods("POST")
-	r.HandleFunc("/page/{page}", views.UpdatePage).Methods("POST")
-	r.HandleFunc("/page/{page}", views.DeletePage).Methods("POST")
+	authed.HandleFunc("/page", views.NewPage).Methods("POST")
+	authed.HandleFunc("/page/{page}", views.UpdatePage).Methods("POST")
+	authed.HandleFunc("/page/{page}", views.DeletePage).Methods("POST")
 }
 
 // r.Group(func(r chi.Router) {
