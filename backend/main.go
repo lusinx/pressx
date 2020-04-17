@@ -8,6 +8,7 @@ import (
 
 	mid "github.com/go-chi/chi/middleware"
 	"github.com/gorilla/mux"
+	"github.com/lusinx/pressx/config"
 	"github.com/lusinx/pressx/router"
 )
 
@@ -26,7 +27,7 @@ func main() {
 	r := mux.NewRouter()
 
 	// Set default config
-	config := Config{
+	timeConf := Config{
 		Timeout: 60,
 	}
 
@@ -36,8 +37,9 @@ func main() {
 		mid.RealIP,
 		mid.Logger,
 		mid.Recoverer,
-		mid.Timeout(config.Timeout*time.Second),
+		mid.Timeout(timeConf.Timeout*time.Second),
 	)
+	config.Init()
 	// Route to views
 	router.Route(r)
 
