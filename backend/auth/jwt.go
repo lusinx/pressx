@@ -16,7 +16,10 @@ func NewJWTInstance() *jwtauth.JWTAuth {
 
 // UserSession returns a new JWT with claims: {user_id: uint, perms: uint}
 func UserSession(instance *jwtauth.JWTAuth, user *models.UserAuth) (*jwt.Token, error) {
-	if token, str, err := instance.Encode(jwt.MapClaims{"user_id": user.ID, "perms": user.Perms}); err != nil {
+	var token *jwt.Token
+	var str string
+	var err error
+	if token, str, err = instance.Encode(jwt.MapClaims{"user_id": user.ID, "perms": user.Perms}); err != nil {
 		return nil, err
 	}
 
