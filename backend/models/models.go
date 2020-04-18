@@ -12,7 +12,7 @@ type Models interface {
 	Create() (interface{}, error)
 }
 
-var db *gorm.DB
+// var db *gorm.DB
 
 // DBMigrate structure
 func DBMigrate() {

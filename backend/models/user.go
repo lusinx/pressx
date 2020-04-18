@@ -6,6 +6,8 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// var db = *gorm.DB
+
 // User structure
 type User struct {
 	gorm.Model
