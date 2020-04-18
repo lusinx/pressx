@@ -23,5 +23,6 @@ func (image *Image) Create() (*Image, error) {
 	if err := db.Create(image).Error; err != nil {
 		return nil, err
 	}
+	db.Create(image)
 	return image, nil
 }
