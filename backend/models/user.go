@@ -16,8 +16,8 @@ type User struct {
 	Firstnames string
 	Lastname   string
 	Img        string
-	Perms      uint8 // For frontend auth
-	ViewPerms  uint8
+	Perms      uint8 // For frontend accessing endpoints
+	ViewPerms  uint8 // For people wanting to view your profile
 	Orgs       []*Org
 	AuthGroup  int // Admin panel auth
 }

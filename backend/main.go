@@ -24,7 +24,7 @@ type Config struct {
 const port = 80
 
 func main() {
-	r := mux.NewRouter()
+	r := mux.NewRouter().StrictSlash(true)
 
 	// Set default config
 	timeConf := Config{

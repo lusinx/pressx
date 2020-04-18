@@ -15,7 +15,7 @@ func Route(r *mux.Router) {
 
 	// User routes
 	r.HandleFunc("/user/{user}", views.GetUser).Methods("GET") // Public
-	authed.HandleFunc("/user", views.NewUser).Methods("POST")
+	r.HandleFunc("/user", views.NewUser).Methods("POST")
 	authed.HandleFunc("/user", views.UpdateUser).Methods("PUT")
 	authed.HandleFunc("/user", views.DeleteUser).Methods("DELETE")
 

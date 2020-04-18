@@ -2,13 +2,11 @@ package views
 
 import (
 	"fmt"
+	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"github.com/lusinx/pressx/auth"
-	"net/http"
-	"encoding/json"
-
 	"github.com/lusinx/pressx/models"
-	"github.com/gorilla/mux"
+	"net/http"
 )
 
 func parseForm(field string, out *string, missing *[]string, r *http.Request) {
@@ -33,12 +31,9 @@ func checkMissing(missing []string, w *http.ResponseWriter) bool {
 
 // GetUser GET Request
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	//w.Header().Set("Content-Type", "application/json")
 	var user = mux.Vars(r)["user"]
 
 	w.Write([]byte(user))
-
-	//w.Write([]byte(models.User{user, "Thomas", "Galligan",}))
 
 	// make request with gorm to request user details
 	//fmt.Fprint(w, "GET Request to users")
@@ -56,6 +51,7 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	)
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, fmt.Sprintf("Request malformed: %v", err), 500)
+		w.Write([]byte("Request malformed"))
 		return
 	}
 	parseForm("username", &username, &missing, r)
@@ -65,36 +61,42 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	parseForm("lastname", &last, &missing, r)
 
 	if checkMissing(missing, &w) {
-
 		return
 	}
+	
+	user := models.User{
+		Model:      gorm.Model{},
+		Username:   username,
+		Firstnames: first,
+		Lastname:   last,
+		Img:        "",
+		Perms:     	5,
+		ViewPerms:  4,
+		Orgs:       nil,
+		AuthGroup:  5,
+	}
+	
 
 	// Generate the user
 	salt := auth.GenerateSalt()
 	password = auth.HashPassword(password, salt)
-	user := models.User{
-		Model:      gorm.Model{},
-		Username:   "",
-		Firstnames: "",
-		Lastname:   "",
-		Img:        "",
-		Perms:      0,
-		ViewPerms:  0,
-		Orgs:       nil,
-		AuthGroup:  0,
-	}
-	_, err = user.Create()
+	
+	_, err := user.Create()
+
 	if err != nil {
 		return
 	}
+
+	fmt.Printf("User %s created", username)
+	userAuth := models.UserAuth{
+		Model:    gorm.Model{},
+		Username: user.Username,
+		Password: password,
+		Salt:     salt,
+		Perms:    user.Perms,
+	}
 	
-	user := models.UserAuth{}
-
-	fmt.Println(user)
-	
-	user.Create()
-
-
+	userAuth.Create()
 
 }
 
