@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 )
 
@@ -22,6 +24,9 @@ type User struct {
 
 // Create method for User
 func (user *User) Create() (*User, error) {
+	if !db.NewRecord(*user) {
+		return nil, fmt.Errorf("attempting to make duplicate User entry")
+	}
 	if err := db.Create(&user).Error; err != nil {
 		return nil, err
 	}

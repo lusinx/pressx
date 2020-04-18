@@ -9,11 +9,8 @@ services:
     volumes:
       - ./backend:/pressx
     environment:
-      - JWT_TOKEN
       - POSTGRES_HOST=172.16.238.13
       - POSTGRES_PORT=5432
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
       - POSTGRES_DATABASE=${POSTGRES_USER}
     networks:
       backend:

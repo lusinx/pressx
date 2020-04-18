@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/spf13/viper"
@@ -23,4 +24,6 @@ func Init() {
 			viper.GetString("postgres.database"),
 		),
 	)
+	fmt.Println(viper.GetString("postgres.config"), os.Getenv("POSTGRES_HOST"), viper.GetString("postgres.host"))
+
 }
