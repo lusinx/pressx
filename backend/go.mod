@@ -3,6 +3,7 @@ module github.com/lusinx/pressx
 go 1.12
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi v4.0.3+incompatible
 	github.com/go-chi/jwtauth v4.0.4+incompatible
 	github.com/gorilla/mux v1.7.4

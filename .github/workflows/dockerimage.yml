@@ -22,7 +22,7 @@ jobs:
         workdir: backend
         registry: docker.pkg.github.com
         tags: "dev-env, ${{ github.sha }}-dev"
-        buildargs: --target dev
+        buildoptions: --target dev
   prod:
 
     runs-on: ubuntu-latest

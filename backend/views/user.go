@@ -2,7 +2,13 @@ package views
 
 import (
 	"fmt"
+	"github.com/jinzhu/gorm"
+	"github.com/lusinx/pressx/auth"
 	"net/http"
+	"encoding/json"
+
+	"github.com/lusinx/pressx/models"
+	"github.com/gorilla/mux"
 )
 
 func parseForm(field string, out *string, missing *[]string, r *http.Request) {
@@ -27,7 +33,15 @@ func checkMissing(missing []string, w *http.ResponseWriter) bool {
 
 // GetUser GET Request
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "GET Request to users")
+	//w.Header().Set("Content-Type", "application/json")
+	var user = mux.Vars(r)["user"]
+
+	w.Write([]byte(user))
+
+	//w.Write([]byte(models.User{user, "Thomas", "Galligan",}))
+
+	// make request with gorm to request user details
+	//fmt.Fprint(w, "GET Request to users")
 }
 
 // NewUser POST Request
@@ -51,13 +65,37 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	parseForm("lastname", &last, &missing, r)
 
 	if checkMissing(missing, &w) {
+
 		return
 	}
 
 	// Generate the user
-	// salt := auth.GenerateSalt()
-	// password = auth.HashPassword(password, salt)
-	// user := models.UserAuth{}
+	salt := auth.GenerateSalt()
+	password = auth.HashPassword(password, salt)
+	user := models.User{
+		Model:      gorm.Model{},
+		Username:   "",
+		Firstnames: "",
+		Lastname:   "",
+		Img:        "",
+		Perms:      0,
+		ViewPerms:  0,
+		Orgs:       nil,
+		AuthGroup:  0,
+	}
+	_, err = user.Create()
+	if err != nil {
+		return
+	}
+	
+	user := models.UserAuth{}
+
+	fmt.Println(user)
+	
+	user.Create()
+
+
+
 }
 
 // UpdateUser PUT Request
