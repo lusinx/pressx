@@ -19,11 +19,11 @@ func Init() {
 			"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 			viper.GetString("postgres.host"),
 			viper.GetInt("postgres.port"),
-			viper.GetString("postgres.username"),
-			viper.GetString("postgres.password"),
-			viper.GetString("postgres.database"),
+			os.Getenv("POSTGRES_USER"),
+			os.Getenv("POSTGRES_PASSWORD"),
+			os.Getenv("POSTGRES_DATABASE"),
 		),
 	)
-	fmt.Println(viper.GetString("postgres.config"), os.Getenv("POSTGRES_HOST"), viper.GetString("postgres.host"))
+	fmt.Println(viper.GetString("postgres.config"))
 
 }
