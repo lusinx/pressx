@@ -36,12 +36,15 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	var username = mux.Vars(r)["user"]
 
 	user, err := models.SearchUser(username)
-	if err != nil || user == nil {
-		http.Error(w, err.Error(), 403)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
 		return
 	}
+	if user == nil {
+		http.Error(w, "User not found", 404)
+	}
 
-	encoded, err := json.Marshal(user)
+	encoded, err := json.Marshal(*user)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -87,7 +90,7 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 		Lastname:   last,
 		Img:        "",
 		Perms:      5,
-		ViewPerms:  4,
+		ViewPerms:  2,
 		Orgs:       nil,
 		AuthGroup:  5,
 	}
