@@ -31,7 +31,6 @@ func main() {
 	timeConf := Config{
 		Timeout: 60,
 	}
-	models.DBMigrate()
 
 	// Middlewares the default stack shall use
 	r.Use(
@@ -42,6 +41,7 @@ func main() {
 		mid.Timeout(timeConf.Timeout*time.Second),
 	)
 	config.Init()
+	models.DBMigrate()
 	// Route to views
 	router.Route(r)
 
