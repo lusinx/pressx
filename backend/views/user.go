@@ -51,11 +51,6 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	respondJSON(w, encoded)
-
-	//w.Write([]byte(user))
-
-	// make request with gorm to request user details
-	//fmt.Fprint(w, "GET Request to users")
 }
 
 // NewUser POST Request

@@ -33,6 +33,7 @@ func (user *User) Create() (*User, error) {
 	return user, nil
 }
 
+// SearchUser returns a user
 func SearchUser(username string) (*User, error) {
 
 	user := User{}
