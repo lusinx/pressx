@@ -20,6 +20,7 @@ func DBMigrate() {
 		panic(err)
 	}
 	db.AutoMigrate(&User{})
+	db.AutoMigrate(&UserAuth{})
 	db.AutoMigrate(&Org{})
 	db.AutoMigrate(&Page{})
 	db.AutoMigrate(&Image{})
