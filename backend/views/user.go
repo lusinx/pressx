@@ -1,12 +1,14 @@
 package views
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"github.com/lusinx/pressx/auth"
 	"github.com/lusinx/pressx/models"
-	"net/http"
 )
 
 func parseForm(field string, out *string, missing *[]string, r *http.Request) {
@@ -63,27 +65,27 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	if checkMissing(missing, &w) {
 		return
 	}
-	
+
 	user := models.User{
 		Model:      gorm.Model{},
 		Username:   username,
 		Firstnames: first,
 		Lastname:   last,
 		Img:        "",
-		Perms:     	5,
+		Perms:      5,
 		ViewPerms:  4,
 		Orgs:       nil,
 		AuthGroup:  5,
 	}
-	
 
 	// Generate the user
 	salt := auth.GenerateSalt()
 	password = auth.HashPassword(password, salt)
-	
+
 	_, err := user.Create()
 
 	if err != nil {
+		http.Error(w, err.Error(), 403)
 		return
 	}
 
@@ -95,9 +97,19 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 		Salt:     salt,
 		Perms:    user.Perms,
 	}
-	
-	userAuth.Create()
 
+	_, err = userAuth.Create()
+	if err != nil {
+		http.Error(w, err.Error(), 403)
+		return
+	}
+
+	encoded, err := json.Marshal(user)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	respondJSON(w, encoded)
 }
 
 // UpdateUser PUT Request

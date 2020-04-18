@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/spf13/viper"
 )
 
@@ -11,8 +12,6 @@ var db *gorm.DB
 type Models interface {
 	Create() (interface{}, error)
 }
-
-// var db *gorm.DB
 
 // DBMigrate structure
 func DBMigrate() {

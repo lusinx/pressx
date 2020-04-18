@@ -9,6 +9,7 @@ import (
 	mid "github.com/go-chi/chi/middleware"
 	"github.com/gorilla/mux"
 	"github.com/lusinx/pressx/config"
+	"github.com/lusinx/pressx/models"
 	"github.com/lusinx/pressx/router"
 )
 
@@ -30,6 +31,7 @@ func main() {
 	timeConf := Config{
 		Timeout: 60,
 	}
+	models.DBMigrate()
 
 	// Middlewares the default stack shall use
 	r.Use(
