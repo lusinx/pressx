@@ -35,7 +35,7 @@ func checkMissing(missing []string, w *http.ResponseWriter) bool {
 func GetUser(w http.ResponseWriter, r *http.Request) {
 	var username = mux.Vars(r)["user"]
 
-	user, err := models.Search(username)
+	user, err := models.SearchUser(username)
 	if err != nil || user == nil {
 		http.Error(w, err.Error(), 403)
 		return
