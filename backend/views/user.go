@@ -33,9 +33,23 @@ func checkMissing(missing []string, w *http.ResponseWriter) bool {
 
 // GetUser GET Request
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	var user = mux.Vars(r)["user"]
+	var username = mux.Vars(r)["user"]
 
-	w.Write([]byte(user))
+	user, err := models.Search(username)
+	if err != nil || user == nil {
+		http.Error(w, err.Error(), 403)
+		return
+	}
+
+	encoded, err := json.Marshal(user)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	respondJSON(w, encoded)
+
+	//w.Write([]byte(user))
 
 	// make request with gorm to request user details
 	//fmt.Fprint(w, "GET Request to users")

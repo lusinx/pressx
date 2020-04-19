@@ -32,3 +32,18 @@ func (user *User) Create() (*User, error) {
 	}
 	return user, nil
 }
+
+func Search(username string) (*User, error) {
+
+	user := User{}
+
+	if err := db.First(&user, "username = ?", username).Error; err != nil {
+		return nil, err
+	}
+
+	if user.ViewPerms >= 3 {
+		return nil, nil
+	}
+
+	return &user, nil
+}
