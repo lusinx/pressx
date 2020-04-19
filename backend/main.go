@@ -8,6 +8,7 @@ import (
 
 	mid "github.com/go-chi/chi/middleware"
 	"github.com/gorilla/mux"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/lusinx/pressx/config"
 	"github.com/lusinx/pressx/models"
 	"github.com/lusinx/pressx/router"
